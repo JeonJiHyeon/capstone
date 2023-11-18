@@ -63,7 +63,7 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
 
     }
 
-    public void getPairedList(){
+    public void getPairedList(View v){
         //블루투스 어댑터를 디폴트 어댑터로 설정
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -144,7 +144,7 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
 
     }
 
-    public void startDeviceSearch(){
+    public void startDeviceSearch(View v){
         info_textView.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         Toast.makeText(this, "기기 검색을 시작합니다.", Toast.LENGTH_SHORT).show();
@@ -243,6 +243,8 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
 
     public void SendMain(String name, String address){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+        intent.putExtra("is_bt_selected","true");
         intent.putExtra("bt_name",name);
         intent.putExtra("bt_address",address);
 
@@ -250,6 +252,24 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
         finish();
 
     }
+    public void cancel_connect(){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+        intent.putExtra("is_bt_selected","false");
+
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Don't forget to unregister the ACTION_FOUND receiver.
+        //unregisterReceiver(receiver);
+    }
+
 
 
 }
