@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +34,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ImageView ground, bike, rider;
     private BluetoothAdapter bluetoothAdapter;
     private Handler bluetoothHandler;
     private Button stop_btn,hot_btn,ice_btn;
-    private TextView degree,blestate;
+    private ObjectAnimator groundobject, riderobject;
+    private TextView degree,blestate,current_mode;
     private BluetoothSocket bluetoothSocket = null; // 블루투스 소켓
     private OutputStream outputStream = null; // 블루투스에 데이터를 출력하기 위한 출력 스트림
     private InputStream inputStream = null; // 블루투스에 데이터를 입력하기 위한 입력 스트림
@@ -64,24 +68,38 @@ public class MainActivity extends AppCompatActivity {
         ice_btn = findViewById(R.id.ice_btn);
         degree = findViewById(R.id.currentdgree);
         blestate = findViewById(R.id.blestate);
+        ground = findViewById(R.id.ground);
+        bike = findViewById(R.id.bike);
+        rider = findViewById(R.id.rider);
+        current_mode = findViewById(R.id.Current_mode);
+
+        groundobject = ObjectAnimator.ofFloat(ground, "rotation",-360);
+        riderobject = ObjectAnimator.ofFloat(rider, "translationY", 25);
+
         stop_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOrder("stop");
+                sendOrder(1);
+                current_mode.setTextColor(Color.parseColor("#ABFFF0"));
+                current_mode.setText("STOP");
             }
 
         });
         hot_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOrder("hot");
+                sendOrder(2);
+                current_mode.setTextColor(Color.parseColor("#FFABAB"));
+                current_mode.setText("HOT");
             }
 
         });
         ice_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOrder("ice");
+                sendOrder(3);
+                current_mode.setTextColor(Color.parseColor("#ABE3FF"));
+                current_mode.setText("ICE");
             }
 
         });
@@ -118,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
             stop_btn.setEnabled(false);
             hot_btn.setEnabled(false);
             ice_btn.setEnabled(false);
+
+            rider.setVisibility(View.GONE);
+            bike.setVisibility(View.VISIBLE);
         }
 
     }
@@ -191,7 +212,8 @@ public class MainActivity extends AppCompatActivity {
             blestate.setText(name + " Connected");
 
             Log.d("process_show!", "블루투스 연결완료");
-
+            bike.setVisibility(View.GONE);
+            rider.setVisibility(View.VISIBLE);
             stop_btn.setEnabled(true);
             hot_btn.setEnabled(true);
             ice_btn.setEnabled(true);
@@ -267,11 +289,52 @@ public class MainActivity extends AppCompatActivity {
         degree.setText(value);
 
     }
-    public void sendOrder(String value) //OnClick에 지정된 함수를 정의
+    public void sendOrder(int value) //OnClick에 지정된 함수를 정의
     {
-        writeBuffer = value.getBytes();
+        String val = String.valueOf(value);
+        writeBuffer = val.getBytes();
         try {
             outputStream.write(writeBuffer);
+
+
+            if (!val.equals("1")){
+                if(groundobject.isStarted()) {
+                    if (groundobject.isPaused()) {
+                        groundobject.resume();
+                        riderobject.resume();
+                    }
+                }else{
+                    /*일정한 속도로 움직이게 함*/
+                    groundobject.setInterpolator(new LinearInterpolator());
+
+                    /*애니메이션 시간을 2초로 설정*/
+                    groundobject.setDuration(10000);
+
+                    /*애니메이션을 무한번 반복하도록 설정*/
+                    groundobject.setRepeatCount(ValueAnimator.INFINITE);
+
+
+                    /*일정한 속도로 움직이게 함*/
+                    riderobject.setInterpolator(new LinearInterpolator());
+
+                    /*애니메이션 시간을 2초로 설정*/
+                    riderobject.setDuration(150);
+
+                    /*애니메이션을 무한번 반복하도록 설정*/
+                    riderobject.setRepeatCount(ValueAnimator.INFINITE);
+                    riderobject.setRepeatMode(ValueAnimator.REVERSE);
+
+                    /*애니메이션을 실행함*/
+                    groundobject.start();
+                    /*애니메이션을 실행함*/
+                    riderobject.start();
+                }
+
+
+            }else{
+                groundobject.pause();
+                riderobject.pause();
+            }
             Log.d("apple", "지횬바보");
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "데이터 전송 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();

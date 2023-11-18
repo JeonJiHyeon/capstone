@@ -8,11 +8,11 @@
     tools:context=".MainActivity" >
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ground"
         android:layout_width="750dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
-        android:layout_marginBottom="-405dp"
+        android:layout_marginBottom="-410dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
@@ -20,23 +20,23 @@
         app:srcCompat="@drawable/field" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/bike"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="576dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/ground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bike" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/rider"
         android:layout_width="105dp"
         android:layout_height="145dp"
         android:layout_marginBottom="576dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/ground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rider" />
@@ -100,7 +100,7 @@
         android:text="모르겠어요"
         android:textColor="#000000"
         android:textSize="65dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/ground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt"
@@ -114,7 +114,7 @@
         android:text="현재온도"
         android:textColor="#000000"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/ground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +126,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#C5FFABAB"
         android:fontFamily="@font/bagelfatoneregular"
         android:text="HOT"
@@ -141,7 +141,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#C5ABE3FF"
         android:fontFamily="@font/bagelfatoneregular"
         android:text="ICE"
@@ -153,7 +153,7 @@
         android:id="@+id/stop_btn"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="92dp"
         android:backgroundTint="#C5ABFFF0"
         android:fontFamily="@font/bagelfatoneregular"
         android:text="STOP"
@@ -161,6 +161,29 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.TextView
+        android:id="@+id/modetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="MODE"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/blestate_title"
+        app:layout_constraintTop_toBottomOf="@+id/blestate_title" />
+
+    <android.widget.TextView
+        android:id="@+id/Current_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="STOP"
+        android:textColor="#ABFFF0"
+        app:layout_constraintStart_toStartOf="@+id/blestate"
+        app:layout_constraintTop_toBottomOf="@+id/blestate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

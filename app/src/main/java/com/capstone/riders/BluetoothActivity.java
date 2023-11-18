@@ -148,6 +148,7 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
         info_textView.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         Toast.makeText(this, "기기 검색을 시작합니다.", Toast.LENGTH_SHORT).show();
+        close_bt_btn.setEnabled(false);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(
@@ -201,6 +202,7 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
                     info_textView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                     pair_list_btn.setEnabled(true);
+                    close_bt_btn.setEnabled(true);
 
                     ArrayList<Map<String, String>> DataSet = new ArrayList<Map<String, String>>();
                     for (Map<String, String> data : r_Device) {
@@ -252,7 +254,7 @@ public class BluetoothActivity extends AppCompatActivity implements OnItemClickI
         finish();
 
     }
-    public void cancel_connect(){
+    public void cancel_connect(View v){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
         intent.putExtra("is_bt_selected","false");
