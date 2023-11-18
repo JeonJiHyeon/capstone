@@ -35,6 +35,7 @@
         android:layout_width="105dp"
         android:layout_height="145dp"
         android:layout_marginBottom="576dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,31 +45,120 @@
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
-        android:layout_marginBottom="220dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        android:layout_marginBottom="440dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/dgree" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+    <android.widget.Button
+        android:id="@+id/chang_ble_State"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/dgree"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="연결"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <android.widget.TextView
+        android:id="@+id/blestate_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="상태"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.TextView
+        android:id="@+id/blestate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="OFF"
+        android:textColor="#848484"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/blestate_title"
+        app:layout_constraintTop_toTopOf="@+id/blestate_title" />
+
+    <android.widget.TextView
+        android:id="@+id/currentdgree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="모르겠어요"
+        android:textColor="#000000"
+        android:textSize="65dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt"
+        app:layout_constraintVertical_bias="0.155" />
+
+    <android.widget.TextView
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="현재온도"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.147" />
+
+    <android.widget.Button
+        android:id="@+id/hot_btn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#C5FFABAB"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="HOT"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ice_btn"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/ice_btn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#C5ABE3FF"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="ICE"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/stop_btn"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="108dp"
+        android:backgroundTint="#C5ABFFF0"
+        android:fontFamily="@font/bagelfatoneregular"
+        android:text="STOP"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
